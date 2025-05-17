@@ -26,15 +26,7 @@ function App() {
         <Route path="/myprofile" element={<Myprofile />} />
         <Route path="/MyAppointments" element={<MyAppointments />} />
         <Route path="/appointment/:docId" element={<Appointment />} />
-        <Route
-          path="/admin"
-          element={(() => {
-            window.location.href =
-              "https://doctor-appointment-website-admin-02z3.onrender.com";
-            return null;
-          })()}
-        />
-      </Routes>
+          </Routes>
       <Footer />
     </div>
   );

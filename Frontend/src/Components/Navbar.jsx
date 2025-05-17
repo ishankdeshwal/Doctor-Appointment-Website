@@ -32,11 +32,17 @@ function Navbar() {
                 <li className='py-1'>Contact</li>
                 <hr className='border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden' />
             </NavLink>
-            <NavLink to='/admin'>
-                <li className='border rounded-full px-3 py-0.5'>Admin</li>
-            </NavLink>
+            <button className='border rounded-full px-3 py-0.5'
+  onClick={() =>
+    window.open("https://doctor-appointment-website-admin-02z3.onrender.com", "_blank")
+  }
+>
+ Admin
+</button>
+
         </ul> 
         <div className='flex item-center gap-4'>
+                
             {
                 token && userData ?
                 <div className='flex gap-2 cursor-pointer items-center group relative'>
