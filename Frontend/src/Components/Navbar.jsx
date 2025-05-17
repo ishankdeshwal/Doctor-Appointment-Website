@@ -6,12 +6,11 @@ function Navbar() {
     const navigate=useNavigate()
     const [showmenu,setShowMenu]=useState(false);
     const {token,setToken,userData}=useContext(AppContext)
-    const logout = () => {
-      console.log("Logout called");
-      setToken(false);
-      localStorage.removeItem('token');
-      navigate('/');
-    };
+    const logout=()=>{
+        setToken(false)
+        localStorage.removeItem('token')
+        navigate('/')
+    }
   return (
     <div className='flex items-center justify-between text-sm py-4 mb-5 border-b-2 border-gray-400 '>
        <NavLink to='/'> <img className='w-44 cursor-pointer' src={assets.logo} />
@@ -43,6 +42,7 @@ function Navbar() {
 
         </ul> 
         <div className='flex item-center gap-4'>
+
             {
                 token && userData ?
                 <div className='flex gap-2 cursor-pointer items-center group relative'>
@@ -56,19 +56,7 @@ function Navbar() {
                         </div>
                     </div>
                 </div>
-                :<button 
-                  onClick={(e) => {
-                    e.preventDefault();
-                    console.log("Create Account clicked in Navbar");
-                    // Prevent any default behavior
-                    setTimeout(() => {
-                      navigate('/login');
-                    }, 100);
-                  }} 
-                  className='bg-primary text-white px-8 py-3 rounded-full font-light hidden md:block'
-                >
-                  Create Account
-                </button>
+                :<button onClick={()=> navigate('/login') } className='bg-primary text-white px-8 py-3 rounded-full font-light hidden md:block '>Create Account</button>
             }
             <img onClick={()=>setShowMenu(true)} className='w-6 md:hidden' src={assets.menu_icon} alt="" />
             {/* Mobile menu */}
@@ -90,5 +78,4 @@ function Navbar() {
 }
 
 export default Navbar
-
 

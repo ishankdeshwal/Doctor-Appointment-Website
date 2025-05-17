@@ -10,38 +10,8 @@ const AppContextProvider = (props) => {
   const backendurl =
    'https://doctor-appointment-website-vf6c.onrender.com' ;
   const [doctors, setDoctors] = useState([]);
-  const getStoredToken = () => {
-    const storedToken = localStorage.getItem('token');
-    // Check if token is valid (not null, undefined, or "null" string)
-    if (storedToken && storedToken !== "undefined" && storedToken !== "null") {
-      console.log("Valid token found in storage");
-      return storedToken;
-    }
-    console.log("No valid token in storage");
-    // Clean up invalid tokens
-    localStorage.removeItem('token');
-    return false;
-  };
-
-  // Use the function to initialize token state
-  const [token, setToken] = useState(getStoredToken());
-
-  // Add a token validator function
-  const validateToken = (newToken) => {
-    console.log("Validating token:", newToken);
-    if (newToken && newToken !== "undefined" && newToken !== "null") {
-      console.log("Token is valid");
-      localStorage.setItem('token', newToken);
-      setToken(newToken);
-      return true;
-    }
-    console.log("Token is invalid");
-    localStorage.removeItem('token');
-    setToken(false);
-    return false;
-  };
-
-  const [userData, setUserData] = useState(false);
+  const [token,setToken]=useState(localStorage.getItem('token')?localStorage.getItem('token'):false)
+  const [userData,setUserData]=useState(false);
   const navigate = useNavigate();
   
   const getDoctorsData = async () => {
@@ -93,18 +63,12 @@ const bookAppointment=async()=>{
 
 
 
-  const contextValue = {
+  const value = {
+    doctors,getDoctorsData,
     currencySymbol,
-    backendurl,
-    doctors,
-    setDoctors,
-    token,
-    setToken: validateToken, // Replace direct setter with validator
-    userData,
-    setUserData,
-    getDoctorsData,
-    loadUserProfile,
-    bookAppointment
+    token,setToken
+    ,backendurl
+    ,userData,setUserData,loadUserProfile
   };
 
 
@@ -126,9 +90,10 @@ if(token){
 
 
   return (
-    <AppContext.Provider value={contextValue}>{props.children}</AppContext.Provider>
+    <AppContext.Provider value={value}>{props.children}</AppContext.Provider>
   );
 };
 
 export default AppContextProvider;
+
 
