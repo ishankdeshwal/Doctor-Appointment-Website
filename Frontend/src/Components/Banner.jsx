@@ -13,7 +13,21 @@ function Banner() {
         <p className='text-white sm:text-xl md:text-3xl lg:text-5xl '>Book Appointment</p>
         <p className='text-white mt-4 sm:text-xl md:text-3xl lg:text-5xl '> With 100+ Trusted Doctors</p>
         </div>
-        <button onClick={()=>{navigate('/login');window.scrollTo(0,0)}} className='mt-6 bg-white hover:scale-105 transition-all rounded-full p-3 text-sm sm:text-base text-gray-600 '>Create Account</button>
+        <button 
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log("Create Account clicked in Banner");
+            // Use setTimeout to ensure the event completes before navigation
+            setTimeout(() => {
+              navigate('/login');
+              window.scrollTo(0, 0);
+            }, 100);
+          }} 
+          className='mt-6 bg-white hover:scale-105 transition-all rounded-full p-3 text-sm sm:text-base text-gray-600'
+        >
+          Create Account
+        </button>
         </div>
         {/* Right */}
         <div className='hidden md:block md:w-1/2 lg:w-[370px] relative'>

@@ -35,11 +35,22 @@ function Login() {
     }
   }
 
-  useEffect(()=>{
-  if(token){
-    navigate('/')
-  }
-  },[token])
+  useEffect(() => {
+    console.log("Login page loaded, token status:", !!token);
+    
+    // Only redirect if there's a valid token AND we're not trying to sign up/login
+    if (token && token !== "undefined" && token !== "null") {
+      console.log("Valid token found, redirecting to home");
+      navigate('/');
+    } else {
+      console.log("No valid token found, staying on login page");
+      // Clear any invalid tokens
+      if (token === "undefined" || token === "null") {
+        localStorage.removeItem('token');
+        setToken(false);
+      }
+    }
+  }, [token, navigate]);
 
   return (
     <form onSubmit={onSubmitHandler} className='min-h-[80vh] flex item-center'>
