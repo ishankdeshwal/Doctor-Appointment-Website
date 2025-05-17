@@ -42,7 +42,6 @@ function Navbar() {
 
         </ul> 
         <div className='flex item-center gap-4'>
-                
             {
                 token && userData ?
                 <div className='flex gap-2 cursor-pointer items-center group relative'>
