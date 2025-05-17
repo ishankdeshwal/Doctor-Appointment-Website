@@ -75,7 +75,7 @@ const bookAppointment=async()=>{
 
   useEffect(() => {
     getDoctorsData();
-  }, [getDoctorsData]);
+  }, []);
 
 
 
@@ -83,7 +83,7 @@ const bookAppointment=async()=>{
 if(token){
   loadUserProfile()
 }else{
-  setUserData()
+  setUserData(false)
 }
   },[token])
 
