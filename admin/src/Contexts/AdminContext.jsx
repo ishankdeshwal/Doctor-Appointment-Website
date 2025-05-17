@@ -7,7 +7,7 @@ const AdminContextProvider = (props) => {
     const [doctors,setDoctors]=useState([])
     const [appointment,setAppointment]=useState([])
     const [dashData,setDashData]=useState(false)
-    const backendurl = process.env.REACT_APP_BACKEND_URL;
+    const backendurl = 'https://doctor-appointment-website-snowy.vercel.app';
     
     const getAllDoctors=async()=>{
         try {

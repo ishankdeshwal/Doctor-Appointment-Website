@@ -8,7 +8,7 @@ export const AppContext = createContext();
 const AppContextProvider = (props) => {
   const currencySymbol = "$";
   const backendurl =
-    process.env.REACT_APP_BACKEND_URL ;
+   'https://doctor-appointment-website-snowy.vercel.app' ;
   const [doctors, setDoctors] = useState([]);
   const [token,setToken]=useState(localStorage.getItem('token')?localStorage.getItem('token'):false)
   const [userData,setUserData]=useState(false);
