@@ -1,0 +1,3 @@
+const person=new Person();
+
+
