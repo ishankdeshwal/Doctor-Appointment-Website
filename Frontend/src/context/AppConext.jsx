@@ -7,7 +7,8 @@ export const AppContext = createContext();
 
 const AppContextProvider = (props) => {
   const currencySymbol = "$";
-  const backendurl = 'https://doctor-appointment-website-vf6c.onrender.com';
+  const backendurl =
+   'https://doctor-appointment-website-vf6c.onrender.com' ;
   const [doctors, setDoctors] = useState([]);
   const [token,setToken]=useState(localStorage.getItem('token')?localStorage.getItem('token'):false)
   const [userData,setUserData]=useState(false);
@@ -75,7 +76,7 @@ const bookAppointment=async()=>{
 
   useEffect(() => {
     getDoctorsData();
-  }, []);
+  }, [getDoctorsData]);
 
 
 
@@ -94,4 +95,3 @@ if(token){
 };
 
 export default AppContextProvider;
-
