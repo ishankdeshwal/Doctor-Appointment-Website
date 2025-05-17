@@ -32,6 +32,9 @@ function Navbar() {
                 <li className='py-1'>Contact</li>
                 <hr className='border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden' />
             </NavLink>
+            <NavLink to='/admin'>
+                <li className='border rounded-full px-3 py-0.5'>Admin</li>
+            </NavLink>
         </ul> 
         <div className='flex item-center gap-4'>
             {
@@ -69,3 +72,4 @@ function Navbar() {
 }
 
 export default Navbar
+

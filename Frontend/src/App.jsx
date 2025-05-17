@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Home from "./Pages/Home";
 import Doctors from "./Pages/Doctors";
 import About from "./Pages/About";
@@ -26,6 +26,11 @@ function App() {
         <Route path="/myprofile" element={<Myprofile />} />
         <Route path="/MyAppointments" element={<MyAppointments />} />
         <Route path="/appointment/:docId" element={<Appointment />} />
+        <Route 
+          path="/admin" 
+          element={<Navigate to="https://doctor-appointment-website-6tda.vercel.app" replace />} 
+        />
+        <Route path="/admin/src/Pages/Login.jsx" element={<Login />} />
       </Routes>
       <Footer />
     </div>
@@ -33,3 +38,5 @@ function App() {
 }
 
 export default App;
+
+
