@@ -20,7 +20,8 @@ connectCloudinary().catch(err => console.error("Cloudinary connection error:", e
 app.use(cors({
   origin: [
     'https://doctor-appointment-website-1-gnjq.onrender.com',
-    'https://doctor-appointment-website-admin-02z3.onrender.com'
+    'https://doctor-appointment-website-admin-02z3.onrender.com',
+    'http://localhost:3000' // For local development
   ],
   credentials: true
 }))
@@ -29,6 +30,37 @@ app.use(express.json())
 // health checks
 app.get('/', (req, res) => res.send('Server is running!'))
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }))
+
+// Add this route to test database connection
+app.get('/api/test-db', async (req, res) => {
+  try {
+    // Test if we can access the database
+    const collections = await mongoose.connection.db.listCollections().toArray();
+    
+    // Try to create and retrieve a test document
+    const TestModel = mongoose.model('TestModel', new mongoose.Schema({ 
+      name: String, 
+      timestamp: { type: Date, default: Date.now } 
+    }));
+    
+    await TestModel.create({ name: 'test-' + Date.now() });
+    const count = await TestModel.countDocuments();
+    
+    res.json({ 
+      success: true, 
+      message: 'Database connection successful',
+      collections: collections.map(c => c.name),
+      testDocuments: count
+    });
+  } catch (error) {
+    console.error('Database test error:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Database connection failed',
+      error: error.message
+    });
+  }
+});
 
 // routes
 app.use('/api/admin', adminRouter)
@@ -42,4 +74,6 @@ app.listen(port, () => {
 
 // Optional export (not needed unless using serverless functions)
 export default app
+
+
 

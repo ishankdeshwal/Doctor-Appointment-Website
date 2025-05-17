@@ -8,19 +8,21 @@ const connectDB = async () => {
             socketTimeoutMS: 30000,
             connectTimeoutMS: 10000,
             retryWrites: true,
-            retryReads: true
+            retryReads: true,
+            maxPoolSize: 10, // Limit pool size for serverless environments
+            minPoolSize: 1   // Ensure at least one connection is maintained
         };
 
         console.log("Connecting to MongoDB...");
         
-        // Remove the /prescripto part if it's already in your MONGODB_URI
         await mongoose.connect(process.env.MONGODB_URI, options);
         console.log("Database Connected Successfully");
     } catch (error) {
         console.error("MongoDB Connection Error:", error.message);
-        // Don't exit process on error - critical for serverless
     }
 }
 
 export default connectDB
+
+
 
