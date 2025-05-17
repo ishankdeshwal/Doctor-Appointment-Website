@@ -4,7 +4,7 @@ import mongoose from 'mongoose'
 import 'dotenv/config'
 import connectDB from './Config/Mongodb.js'
 import connectCloudinary from './Config/Cloudinary.js'
-import adminRouter from './Routes/adminRoutes.js'
+import adminRouter from './Routes/AdminRoutes.js'
 import doctorRouter from './Routes/doctorRoutes.js'
 import {userRouter} from './Routes/userRoutes.js'
 
