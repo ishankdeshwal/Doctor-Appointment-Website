@@ -83,7 +83,7 @@ const bookAppointment=async()=>{
 if(token){
   loadUserProfile()
 }else{
-  setUserData(false)
+  setUserData()
 }
   },[token])
 
