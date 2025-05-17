@@ -28,7 +28,7 @@ function App() {
         <Route path="/appointment/:docId" element={<Appointment />} />
         <Route 
           path="/admin" 
-          element={<Navigate to="https://doctor-appointment-website-6tda.vercel.app" replace />} 
+          element={<Navigate to="https://doctor-appointment-website-admin-02z3.onrender.com" replace />} 
         />
         <Route path="/admin/src/Pages/Login.jsx" element={<Login />} />
       </Routes>
