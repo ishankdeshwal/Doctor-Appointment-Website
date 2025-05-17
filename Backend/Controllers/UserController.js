@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import userModel from "../Models/UserModel.js";
 import jwt from "jsonwebtoken";
 import { v2 as cloudinary } from "cloudinary";
-import doctorModel from "../models/doctorModel.js";
+import doctorModel from "../Models/DoctorModel.js";
 import appointmentModel from "../Models/AppointmentModel.js";
 import razorpay from "razorpay";
 

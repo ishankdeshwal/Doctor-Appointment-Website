@@ -1,4 +1,4 @@
-import doctorModel from "../models/doctorModel.js";
+import doctorModel from "../Models/DoctorModel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import appointmentModel from "../Models/AppointmentModel.js";
