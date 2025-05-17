@@ -2,8 +2,10 @@ services:
   - type: web
     name: doctor-appointment-backend
     env: node
-    buildCommand: npm install && npm rebuild bcrypt --build-from-source
+    buildCommand: npm install
     startCommand: node server.js
     envVars:
       - key: NODE_VERSION
         value: 18.x
+      - key: PORT
+        value: 10000

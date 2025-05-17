@@ -18,10 +18,7 @@ connectCloudinary().catch(err => console.error("Cloudinary connection error:", e
 
 // middlewares
 app.use(cors({
-  origin: [
-    'https://doctor-appointment-website-ex4a.vercel.app',
-    'https://doctor-appointment-website-6tda.vercel.app'
-  ],
+  origin: '*',  // Allow all origins for testing
   credentials: true
 }))
 app.use(express.json())
@@ -36,15 +33,10 @@ app.use('/api/admin', adminRouter)
 app.use('/api/doctor', doctorRouter)
 app.use('/api/user', userRouter)
 
-// Only start the server if not in Vercel serverless environment
-if (process.env.NODE_ENV !== 'production') {
-  app.listen(port, () => {
-    console.log(`Server is running on port ${port}`)
-  })
-}
+// Always listen on the port (don't check for production)
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Server is running on port ${port}`)
+})
 
-// For Vercel serverless functions
 export default app
-
-
 
