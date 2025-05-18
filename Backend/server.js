@@ -30,7 +30,9 @@ app.use(express.json())
 // health checks
 app.get('/', (req, res) => res.send('Server is running!'))
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }))
-
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
 // Add this route to test database connection
 app.get('/api/test-db', async (req, res) => {
   try {
