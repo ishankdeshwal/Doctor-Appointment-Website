@@ -7,7 +7,12 @@ import connectCloudinary from './Config/Cloudinary.js'
 import adminRouter from './Routes/adminRoutes.js'
 import doctorRouter from './Routes/doctorRoutes.js'
 import { userRouter } from './Routes/userRoutes.js'
-const path = require('path');
+
+import path from 'path'
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 // app config
 const app = express()
@@ -31,55 +36,51 @@ app.use(express.json())
 // health checks
 app.get('/', (req, res) => res.send('Server is running!'))
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }))
-app.use(express.static(path.join(__dirname, '../Frontend/build')));
+
+// Serve React build files
+app.use(express.static(path.join(__dirname, '../Frontend/build')))
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../Frontend/build', 'index.html'));
-}); // Add this route to test database connection
+  res.sendFile(path.join(__dirname, '../Frontend/build', 'index.html'))
+})
+
+// Test DB connection
 app.get('/api/test-db', async (req, res) => {
   try {
-    // Test if we can access the database
-    const collections = await mongoose.connection.db.listCollections().toArray();
-    
-    // Try to create and retrieve a test document
-    const TestModel = mongoose.model('TestModel', new mongoose.Schema({ 
-      name: String, 
-      timestamp: { type: Date, default: Date.now } 
-    }));
-    
-    await TestModel.create({ name: 'test-' + Date.now() });
-    const count = await TestModel.countDocuments();
-    
-    res.json({ 
-      success: true, 
+    const collections = await mongoose.connection.db.listCollections().toArray()
+
+    const TestModel = mongoose.model('TestModel', new mongoose.Schema({
+      name: String,
+      timestamp: { type: Date, default: Date.now }
+    }))
+
+    await TestModel.create({ name: 'test-' + Date.now() })
+    const count = await TestModel.countDocuments()
+
+    res.json({
+      success: true,
       message: 'Database connection successful',
       collections: collections.map(c => c.name),
       testDocuments: count
-    });
+    })
   } catch (error) {
-    console.error('Database test error:', error);
-    res.status(500).json({ 
-      success: false, 
+    console.error('Database test error:', error)
+    res.status(500).json({
+      success: false,
       message: 'Database connection failed',
       error: error.message
-    });
+    })
   }
-});
+})
 
-// routes
+// API routes
 app.use('/api/admin', adminRouter)
 app.use('/api/doctor', doctorRouter)
 app.use('/api/user', userRouter)
 
-// ✅ Always start the server
+// Start server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`)
 })
 
-// Optional export (not needed unless using serverless functions)
+// Optional export for serverless environments
 export default app
-
-
-
-
-
-
