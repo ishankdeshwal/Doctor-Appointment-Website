@@ -27,7 +27,7 @@ app.use(cors({
   origin: [
     'https://doctor-appointment-website-1-gnjq.onrender.com',
     'https://doctor-appointment-website-admin-02z3.onrender.com',
-    'http://localhost:3000' // For local development
+    
   ],
   credentials: true
 }))
