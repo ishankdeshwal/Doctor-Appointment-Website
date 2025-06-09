@@ -121,8 +121,13 @@ function Navbar() {
             <NavLink onClick={() => setShowMenu(false)} to="/contact">
               <p className="px-4 py-2 rounded inline-block">Contact</p>
             </NavLink>
-            <button
-              onClick={() => navigate("/login")}
+            <button 
+            
+              onClick={() => {
+                  navigate("/login")
+                  setShowMenu(false)   
+              }
+            }
               className="px-4 py-2 rounded inline-block bg-primary text-white"
             >
               Create Account
@@ -130,10 +135,12 @@ function Navbar() {
             <button
               className="border rounded-full px-2 mt-3 text-sm py-0.5 "
               onClick={() =>
-                window.open(
+              {  window.open(
                   "https://doctor-appointment-website-admin-02z3.onrender.com",
                   "_blank"
                 )
+                setShowMenu(false) 
+            }
               }
             >
               Admin Login
