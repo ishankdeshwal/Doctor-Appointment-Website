@@ -74,13 +74,13 @@ app.use('/api/user', userRouter)
 
 // ✅ Catch-all route to handle React Router reloads
 app.get('*', (req, res) => {
-  // If the request is for API, return 404 JSON error
   if (req.originalUrl.startsWith('/api')) {
-    return res.status(404).json({ error: 'API route not found' })
+    return res.status(404).json({ error: 'API route not found' });
   }
-  // For all other routes (including /, /profile, /dashboard), redirect to home page
-  res.redirect('/')
-})
+  // Instead of redirecting, serve index.html
+  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+});
+
 
 
 // start server
